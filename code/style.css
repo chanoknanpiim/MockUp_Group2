@@ -175,20 +175,27 @@ body {
    📱 Presentation Mockup Style (สำหรับหน้าจอมือถือ)
    ========================================= */
 @media screen and (max-width: 768px) {
+    /* 1. ปลดล็อกการล็อกหน้าจอทั้งหมด ให้เลื่อนได้อย่างอิสระบนมือถือ */
     body {
         background-color: #e5e5e5; 
-        flex-direction: column;
+        display: block; /* ยกเลิก flex */
+        height: auto; /* ยกเลิกการล็อกความสูง 100vh */
+        overflow: auto; /* เปิดให้เลื่อนขึ้นลงได้ตามปกติ */
+        -webkit-overflow-scrolling: touch; /* เลื่อนลื่นๆ บน iOS */
     }
     
     .dashboard-container {
-        flex-direction: column;
-        overflow: hidden; /* ป้องกันการขยับของหน้าจอหลัก */
+        display: block;
+        height: auto;
+        overflow: visible;
     }
 
+    /* 2. แถบเมนูด้านบน */
     .sidebar {
         width: 100%;
         padding: 16px;
-        position: relative;
+        position: sticky;
+        top: 0;
         z-index: 999;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
@@ -207,12 +214,12 @@ body {
         border-radius: 20px;
     }
 
-    /* ย้ายพื้นที่การ Scroll มาไว้ที่ Content แทน */
+    /* 3. ปรับพื้นที่เนื้อหาให้รองรับการเลื่อน */
     .main-content {
-        padding: 20px 20px 60px 20px;
-        display: block; /* เปลี่ยนจาก flex เป็น block เพื่อให้ scroll ได้อิสระ */
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        padding: 40px 20px 80px 20px;
+        display: block;
+        height: auto;
+        overflow: visible;
     }
 
     .mockup-wrapper {
@@ -220,18 +227,19 @@ body {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        gap: 24px;
+        gap: 24px; /* ระยะห่างระหว่างโทรศัพท์กับคำอธิบาย */
     }
 
-    /* กรอบโทรศัพท์ขนาด 70% */
+    /* 4. โทรศัพท์จำลองขนาด 70% */
     .phone-mockup {
-        width: 40vw; 
+        width: 70vw; 
         max-width: 320px; 
         height: auto;
         aspect-ratio: 375 / 812; 
         border: 12px solid #111;
         border-radius: 35px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+        flex-shrink: 0;
     }
 
     .phone-mockup::before {
@@ -243,14 +251,15 @@ body {
         padding-top: 45px;
     }
 
-    /* คำอธิบายจะถูกนำมาต่อท้ายโทรศัพท์จำลอง */
+    /* 5. คำอธิบายหน้าจอ (บังคับให้แสดงด้านล่าง) */
     .description-panel {
         display: block;
         width: 100%;
         max-width: 320px;
-        padding: 20px;
+        padding: 24px;
         border-radius: 20px;
-        margin-bottom: 20px;
-        flex-shrink: 0;
+        margin-bottom: 40px; /* เว้นที่ว่างด้านล่างสุดกันโดนบัง */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        background-color: #ffffff;
     }
 }
