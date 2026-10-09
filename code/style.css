@@ -175,22 +175,21 @@ body {
    📱 Presentation Mockup Style (สำหรับหน้าจอมือถือ)
    ========================================= */
 @media screen and (max-width: 768px) {
-    /* 1. ปลดล็อกการล็อกหน้าจอทั้งหมด ให้เลื่อนได้อย่างอิสระบนมือถือ */
-    body {
-        background-color: #e5e5e5; 
-        display: block; /* ยกเลิก flex */
-        height: auto; /* ยกเลิกการล็อกความสูง 100vh */
-        overflow: auto; /* เปิดให้เลื่อนขึ้นลงได้ตามปกติ */
-        -webkit-overflow-scrolling: touch; /* เลื่อนลื่นๆ บน iOS */
+    html, body {
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow: auto !important;
+        display: block !important;
+        background-color: #e5e5e5 !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     .dashboard-container {
-        display: block;
-        height: auto;
-        overflow: visible;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
     }
 
-    /* 2. แถบเมนูด้านบน */
     .sidebar {
         width: 100%;
         padding: 16px;
@@ -198,6 +197,7 @@ body {
         top: 0;
         z-index: 999;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        background: #fff;
     }
     .sidebar h2 { font-size: 16px; text-align: center; margin-bottom: 12px; }
     .sidebar-desc { display: none; }
@@ -214,32 +214,31 @@ body {
         border-radius: 20px;
     }
 
-    /* 3. ปรับพื้นที่เนื้อหาให้รองรับการเลื่อน */
     .main-content {
-        padding: 40px 20px 80px 20px;
-        display: block;
-        height: auto;
-        overflow: visible;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+        padding: 40px 20px 100px 20px !important;
     }
 
     .mockup-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 24px; /* ระยะห่างระหว่างโทรศัพท์กับคำอธิบาย */
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+        width: 100% !important;
     }
 
-    /* 4. โทรศัพท์จำลองขนาด 70% */
     .phone-mockup {
-        width: 70vw; 
-        max-width: 320px; 
-        height: auto;
-        aspect-ratio: 375 / 812; 
-        border: 12px solid #111;
-        border-radius: 35px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-        flex-shrink: 0;
+        width: 70vw !important; 
+        max-width: 320px !important; 
+        height: auto !important;
+        aspect-ratio: 375 / 812 !important; 
+        border: 12px solid #111 !important;
+        border-radius: 35px !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; 
+        flex-shrink: 0 !important;
     }
 
     .phone-mockup::before {
@@ -247,19 +246,21 @@ body {
         height: 26px;
         top: 8px;
     }
+    
     .line-header {
         padding-top: 45px;
     }
 
-    /* 5. คำอธิบายหน้าจอ (บังคับให้แสดงด้านล่าง) */
+    /* บังคับคำอธิบายให้โชว์ */
     .description-panel {
-        display: block;
-        width: 100%;
-        max-width: 320px;
-        padding: 24px;
-        border-radius: 20px;
-        margin-bottom: 40px; /* เว้นที่ว่างด้านล่างสุดกันโดนบัง */
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        background-color: #ffffff;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        padding: 24px !important;
+        border-radius: 20px !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
     }
 }
