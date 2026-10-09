@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plod-Ploi - LINE Bot Mockup</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <!-- ส่วน A: Sidebar นำทางสำหรับผู้พัฒนา -->
+    <aside class="sidebar">
+        <h2>❕Mockup Menu Group2❗️</h2>
+        <p class="sidebar-desc">คลิกเพื่อดูแต่ละหน้าจอของ Plod-Ploi</p>
+        <ul id="nav-menu">
+            <li><button data-target="screen-welcome" class="active">1. Welcome & Rich Menu</button></li>
+            <li><button data-target="screen-location">2. Location Request</button></li>
+            <li><button data-target="screen-results">3. Search Results (Flex)</button></li>
+            <li><button data-target="screen-filter">4. Filter Search (LIFF)</button></li>
+            <li><button data-target="screen-report">5. Report & Review (LIFF)</button></li>
+            <li><button data-target="screen-success">6. Success State</button></li>
+            <li><button data-target="screen-error">7. Empty / Error State</button></li>
+        </ul>
+    </aside>
+
+    <!-- ส่วน B: พื้นที่แสดง Phone Mockup และคำอธิบาย -->
+    <main class="main-content">
+        <div class="mockup-wrapper">
+            <!-- โทรศัพท์จำลอง -->
+            <div class="phone-mockup">
+                <!-- LINE Header -->
+                <div class="line-header" id="dynamic-header">
+                    <span class="back-btn" id="liff-close-btn" style="display:none;">✕</span>
+                    <span class="title">🚽 ปลดปล่อย (Plod-Ploi)</span>
+                </div>
+
+                <!-- พื้นที่เนื้อหาที่เปลี่ยนไปตามหน้าจอ -->
+                <div class="phone-content" id="phone-content">
+                    
+                    <!-- 1. Welcome Screen -->
+                    <div id="screen-welcome" class="screen-view active">
+                        <div class="chat-area">
+                            <div class="chat-bubble bot">
+                                <div class="avatar">Bot</div>
+                                <div class="message">
+                                    สวัสดีค่ะ! ยินดีต้อนรับสู่ 'ปลดปล่อย' ✨<br><br>
+                                    กำลังเร่งด่วนอยู่หรือเปล่าคะ? ให้เราช่วยหาห้องน้ำที่ใกล้ที่สุดใน มธ. ท่าพระจันทร์ ให้นะคะ กดเมนูด้านล่างได้เลย 👇
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rich-menu">
+                            <div class="rm-top" onclick="app.navigate('screen-location')">
+                                <span class="icon">📍</span><br>หาห้องน้ำใกล้ฉัน
+                            </div>
+                            <div class="rm-bottom">
+                                <div class="rm-btn border-right" onclick="app.navigate('screen-filter')">
+                                    <span class="icon">🔍</span> กรองห้องน้ำ
+                                </div>
+                                <div class="rm-btn" onclick="app.navigate('screen-report')">
+                                    <span class="icon">⭐</span> รีวิว & แจ้งปัญหา
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Location Request Screen -->
+                    <div id="screen-location" class="screen-view hidden">
+                        <div class="chat-area">
+                            <div class="chat-bubble user">
+                                <div class="message">หาห้องน้ำใกล้ฉัน</div>
+                            </div>
+                            <div class="chat-bubble bot">
+                                <div class="avatar">Bot</div>
+                                <div class="message">
+                                    เพื่อค้นหาห้องน้ำที่ใกล้ที่สุด รบกวนแชร์ตำแหน่งที่ตั้ง (Location) ปัจจุบันของคุณให้หน่อยนะคะ 📍
+                                </div>
+                            </div>
+                            <div class="quick-reply-area">
+                                <button class="quick-reply-btn" onclick="app.navigate('screen-results')">
+                                    📍 แชร์ตำแหน่งที่ตั้ง
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Search Results (Flex Message) -->
+                    <div id="screen-results" class="screen-view hidden">
+                        <div class="chat-area">
+                            <div class="chat-bubble user">
+                                <div class="message">[ส่งตำแหน่งที่ตั้งแล้ว]</div>
+                            </div>
+                            <div class="chat-bubble bot">
+                                <div class="avatar">Bot</div>
+                                <div class="message">เจอแล้ว! นี่คือห้องน้ำที่ใกล้คุณที่สุด 3 อันดับแรกค่ะ</div>
+                            </div>
+                            <!-- Flex Message Carousel -->
+                            <div class="flex-carousel">
+                                <!-- Card 1 -->
+                                <div class="flex-card">
+                                    <div class="fc-header">ตึกคณะศิลปศาสตร์ - ชั้น 1</div>
+                                    <div class="fc-body">
+                                        <div class="fc-distance">📍 ห่างจากคุณ 150 ม. (เดิน ~2 นาที)</div>
+                                        <div class="fc-badge success">✅ ใช้งานได้ปกติ</div>
+                                        <div class="fc-divider"></div>
+                                        <div class="fc-facilities">
+                                            💦 มีสายฉีดชำระ | ♿️ ห้องน้ำผู้พิการ
+                                        </div>
+                                        <div class="fc-rating">รีวิว: ⭐⭐⭐⭐⭐ (4.8)</div>
+                                    </div>
+                                    <button class="fc-btn primary" onclick="alert('จำลองการเปิด Google Maps')">นำทางไปที่นี่</button>
+                                </div>
+                                <!-- Card 2 -->
+                                <div class="flex-card">
+                                    <div class="fc-header bg-warning">ตึกคณะนิติศาสตร์ - ชั้น 2</div>
+                                    <div class="fc-body">
+                                        <div class="fc-distance">📍 ห่างจากคุณ 200 ม. (เดิน ~3 นาที)</div>
+                                        <div class="fc-badge warning">🧹 กำลังทำความสะอาด</div>
+                                        <div class="fc-divider"></div>
+                                        <div class="fc-facilities">
+                                            💦 มีสายฉีดชำระ | 🚻 แยกเพศ
+                                        </div>
+                                        <div class="fc-rating">รีวิว: ⭐⭐⭐⭐ (4.0)</div>
+                                    </div>
+                                    <button class="fc-btn primary" onclick="alert('จำลองการเปิด Google Maps')">นำทางไปที่นี่</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Filter Search (LIFF) -->
+                    <div id="screen-filter" class="screen-view hidden liff-view">
+                        <div class="liff-content">
+                            <h3>ค้นหาตามความต้องการ</h3>
+                            <p class="subtitle">เลือกสิ่งอำนวยความสะดวกที่คุณต้องการ (เลือกได้หลายข้อ)</p>
+                            
+                            <label class="checkbox-card">
+                                <input type="checkbox" checked>
+                                <span>💦 มีสายฉีดชำระ</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox">
+                                <span>🚻 แยกเพศชาย/หญิง</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox">
+                                <span>♿️ ห้องน้ำสำหรับผู้พิการ</span>
+                            </label>
+
+                            <button class="btn-primary full-width mt-20" onclick="app.navigate('screen-results')">ค้นหาห้องน้ำ</button>
+                        </div>
+                    </div>
+
+                    <!-- 5. Report & Review (LIFF) -->
+                    <div id="screen-report" class="screen-view hidden liff-view">
+                        <div class="liff-content">
+                            <h3>รายงานสถานะ & รีวิว</h3>
+                            
+                            <div class="form-group">
+                                <label>เลือกห้องน้ำ:</label>
+                                <select class="form-control">
+                                    <option>ตึกคณะศิลปศาสตร์ - ชั้น 1</option>
+                                    <option>ตึกคณะนิติศาสตร์ - ชั้น 2</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>สถานะปัจจุบัน:</label>
+                                <div class="radio-group">
+                                    <label class="radio-btn"><input type="radio" name="status" checked> ✅ ปกติ</label>
+                                    <label class="radio-btn"><input type="radio" name="status"> 🧹 ทำความสะอาด</label>
+                                    <label class="radio-btn error"><input type="radio" name="status"> 🚫 ชำรุด</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ให้คะแนนความสะอาด:</label>
+                                <div class="star-rating">
+                                    <span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star active">★</span><span class="star">★</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ข้อความรีวิวเพิ่มเติม:</label>
+                                <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด เช่น ทิชชู่หมด, น้ำไม่ไหล..."></textarea>
+                            </div>
+
+                            <button class="btn-primary full-width" onclick="app.navigate('screen-success')">ส่งรายงาน</button>
+                        </div>
+                    </div>
+
+                    <!-- 6. Success State -->
+                    <div id="screen-success" class="screen-view hidden liff-view center-content">
+                        <div class="status-icon success-icon">✅</div>
+                        <h3>ขอบคุณสำหรับข้อมูล!</h3>
+                        <p class="subtitle text-center">ระบบอัปเดตสถานะห้องน้ำและบันทึกรีวิวของคุณเรียบร้อยแล้ว เพื่อให้เพื่อนๆ ไม่เสียเที่ยว</p>
+                        <button class="btn-secondary full-width mt-20" onclick="app.navigate('screen-welcome')">กลับสู่หน้าหลัก</button>
+                    </div>
+
+                    <!-- 7. Error / Empty State -->
+                    <div id="screen-error" class="screen-view hidden liff-view center-content">
+                        <div class="status-icon error-icon">🔍</div>
+                        <h3>ไม่พบห้องน้ำที่ตรงเงื่อนไข</h3>
+                        <p class="subtitle text-center">ไม่พบห้องน้ำที่มีสิ่งอำนวยความสะดวกตามที่คุณระบุในระยะ 500 เมตร กรุณาลดเงื่อนไขการค้นหาลง</p>
+                        <button class="btn-primary full-width mt-20" onclick="app.navigate('screen-filter')">แก้ไขตัวกรอง</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- คำอธิบายหน้าจอ (เปลี่ยนตามเนื้อหา) -->
+            <div class="description-panel" id="desc-panel">
+                <!-- เนื้อหาจะถูกแทรกด้วย JavaScript -->
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
