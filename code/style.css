@@ -172,32 +172,29 @@ body {
 .desc-section ul { padding-left: 20px; }
 
 /* =========================================
-   📱 Presentation Mockup Style (สำหรับหน้าจอมือถือ)
+   📱 Mobile View (แก้ปัญหาเลื่อนไม่ลง 100%)
    ========================================= */
 @media screen and (max-width: 768px) {
-    html, body {
-        height: auto !important;
-        min-height: 100vh !important;
-        overflow: auto !important;
-        display: block !important;
-        background-color: #e5e5e5 !important;
-        -webkit-overflow-scrolling: touch !important;
+    /* 1. ล็อก Body ไว้ให้อยู่นิ่งๆ (แก้บั๊กของ iOS Safari) */
+    body, html {
+        height: 100%;
+        overflow: hidden; 
+        background-color: #e5e5e5;
     }
     
     .dashboard-container {
-        height: auto !important;
-        display: block !important;
-        overflow: visible !important;
+        flex-direction: column;
+        height: 100%;
     }
 
+    /* 2. ล็อกเมนูด้านบนไม่ให้ขยับตาม */
     .sidebar {
         width: 100%;
         padding: 16px;
-        position: sticky;
-        top: 0;
-        z-index: 999;
+        flex-shrink: 0;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         background: #fff;
+        z-index: 999;
     }
     .sidebar h2 { font-size: 16px; text-align: center; margin-bottom: 12px; }
     .sidebar-desc { display: none; }
@@ -214,53 +211,49 @@ body {
         border-radius: 20px;
     }
 
+    /* 3. หัวใจสำคัญ: ให้กล่องนี้เป็นตัว Scroll แทน! */
     .main-content {
-        height: auto !important;
-        display: block !important;
-        overflow: visible !important;
-        padding: 40px 20px 100px 20px !important;
+        flex: 1; 
+        height: 100%; 
+        overflow-y: auto; /* บังคับให้เนื้อหาเลื่อนขึ้นลงได้ */
+        -webkit-overflow-scrolling: touch; /* ทำให้เลื่อนลื่นปรื๊ดบนไอโฟน */
+        padding: 30px 20px 80px 20px;
+        display: block;
     }
 
     .mockup-wrapper {
-        height: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 30px !important;
-        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 30px; /* ระยะห่างระหว่างโทรศัพท์กับคำอธิบาย */
     }
 
+    /* 4. โทรศัพท์จำลอง */
     .phone-mockup {
-        width: 70vw !important; 
-        max-width: 320px !important; 
-        height: auto !important;
-        aspect-ratio: 375 / 812 !important; 
-        border: 12px solid #111 !important;
-        border-radius: 35px !important;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important; 
-        flex-shrink: 0 !important;
+        width: 30vw; 
+        max-width: 320px; 
+        height: auto;
+        aspect-ratio: 375 / 812; 
+        border: 12px solid #111;
+        border-radius: 35px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+        flex-shrink: 0; /* ห้ามโทรศัพท์หดตัว */
     }
 
-    .phone-mockup::before {
-        width: 90px;
-        height: 26px;
-        top: 8px;
-    }
-    
-    .line-header {
-        padding-top: 45px;
-    }
+    .phone-mockup::before { width: 90px; height: 26px; top: 8px; }
+    .line-header { padding-top: 45px; }
 
-    /* บังคับคำอธิบายให้โชว์ */
+    /* 5. คำอธิบายแสดงด้านล่างสุด และถูกเลื่อนตามลงมาได้ */
     .description-panel {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 100% !important;
-        max-width: 320px !important;
-        padding: 24px !important;
-        border-radius: 20px !important;
-        background-color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        padding: 24px;
+        border-radius: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        flex-shrink: 0;
+        margin-bottom: 40px; /* กันโดนขอบจอล่างบัง */
     }
 }
