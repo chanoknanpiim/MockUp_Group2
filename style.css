@@ -157,80 +157,104 @@ body {
 .desc-section p, .desc-section ul { font-size: 14px; color: var(--color-text-muted); line-height: 1.6; }
 .desc-section ul { padding-left: 20px; }
 /* =========================================
-   📱 Mobile View (Native LINE App Experience)
+   📱 Presentation Mockup Style (จำลองเป็นภาพพรีเซนต์)
    ========================================= */
+
+/* 1. เพิ่ม Dynamic Island (รอยบาก iPhone) ให้ดูสมจริง */
+.phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 32px;
+    background-color: #000;
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+/* ดัน Header ของแอปปลดปล่อยลงมา เพื่อไม่ให้ข้อความทับรอยบาก */
+.line-header {
+    padding-top: 54px; 
+}
+
+/* 2. การจัดหน้าเว็บเมื่อเปิดบนจอมือถือ */
 @media screen and (max-width: 768px) {
-    /* 1. ล็อกไม่ให้หน้าเว็บเลื่อนขึ้นลงได้ เพื่อจำลองเป็นแอปพลิเคชัน */
     body {
-        display: flex;
-        flex-direction: column;
-        height: 100dvh; /* ใช้ความสูง 100% ของหน้าจอมือถือเป๊ะๆ */
-        overflow: hidden;
-        background-color: var(--color-background);
+        /* เปลี่ยนสีพื้นหลังให้เป็นสีเทาอ่อนแบบงานพรีเซนต์ */
+        background-color: #e5e5e5; 
+        display: block;
+        overflow-y: auto;
     }
     
     .dashboard-container {
         flex-direction: column;
-        height: 100%;
-        width: 100%;
     }
 
-    /* 2. แถบเมนูด้านซ้าย ย้ายมาเป็นแถบปุ่มเล็กๆ ด้านบน (ใช้นิ้วปัดซ้าย-ขวาเพื่อเลือกหน้าได้) */
+    /* แถบเมนูเปลี่ยนหน้า ย้ายไปไว้ด้านบนและปัดซ้ายขวาได้ */
     .sidebar {
         width: 100%;
-        padding: 12px 10px;
-        background: var(--color-surface);
-        border-bottom: 1px solid #ddd;
-        z-index: 100;
+        padding: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .sidebar h2, .sidebar-desc { display: none; }
+    .sidebar h2 { font-size: 16px; text-align: center; margin-bottom: 12px; }
+    .sidebar-desc { display: none; }
     .sidebar ul {
         flex-direction: row;
         overflow-x: auto;
         gap: 8px;
+        padding-bottom: 4px;
     }
-    .sidebar ul::-webkit-scrollbar { display: none; } /* ซ่อนหลอด Scrollbar */
+    .sidebar ul::-webkit-scrollbar { display: none; }
     .sidebar button {
-        width: max-content;
-        padding: 6px 14px;
         white-space: nowrap;
+        padding: 8px 16px;
         border-radius: 20px;
     }
 
-    /* 3. พื้นที่แอป ขยายเต็มพื้นที่หน้าจอที่เหลือ */
     .main-content {
-        padding: 0;
-        flex: 1;
-        height: 100%;
-        overflow: hidden;
+        padding: 40px 20px; /* เพิ่มพื้นที่รอบๆ ให้โทรศัพท์ดูลอยอยู่ตรงกลาง */
+        display: flex;
+        justify-content: center;
     }
+
     .mockup-wrapper {
-        width: 100%;
-        height: 100%;
         flex-direction: column;
-        gap: 0;
-    }
-
-    /* 4. นำกรอบโทรศัพท์สีดำออก แล้วให้ UI ขยายชิดขอบมือถือของคุณจริงๆ */
-    .phone-mockup {
+        align-items: center;
         width: 100%;
-        height: 100%;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
     }
 
-    /* 5. ปรับ Header ให้เว้นที่สำหรับแถบเวลา/แบตเตอรี่ ด้านบนของมือถือ */
+    /* 📱 จัดการกรอบโทรศัพท์ (สำคัญที่สุด) */
+    .phone-mockup {
+        /* กำหนดความกว้างให้พอดีจอมือถือที่คนเปิดดู */
+        width: 85vw;
+        max-width: 375px;
+        height: auto;
+        /* บังคับสัดส่วนให้เป็นโทรศัพท์เสมอ (กว้าง 375 : สูง 812) */
+        aspect-ratio: 375 / 812; 
+        
+        /* สร้างกรอบโทรศัพท์สีดำหนาๆ พร้อมมุมโค้ง */
+        border: 14px solid #111;
+        border-radius: 40px;
+        /* ใส่เงาด้านหลังโทรศัพท์ให้ดูลอยขึ้นมาจากพื้นหลัง */
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+    }
+
+    /* ปรับขนาดรอยบาก iPhone ให้เล็กลงตามสัดส่วนจอ */
+    .phone-mockup::before {
+        width: 90px;
+        height: 26px;
+        top: 8px;
+    }
     .line-header {
-        padding-top: max(env(safe-area-inset-top), 10px);
+        padding-top: 45px;
     }
 
-    /* 6. ปรับ Rich Menu ด้านล่างสุด ให้เว้นที่สำหรับขีดโฮม (Home Indicator) ของ iPhone */
-    .rich-menu {
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    /* 7. ซ่อนกล่องคำอธิบายทิ้ง เพื่อไม่ให้ทำลายบรรยากาศของแอป */
+    /* ซ่อนกล่องคำอธิบายด้านล่าง เพื่อให้โฟกัสที่งานดีไซน์เน้นๆ */
     .description-panel {
         display: none;
     }
