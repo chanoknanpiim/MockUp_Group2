@@ -179,20 +179,21 @@ body {
     padding-top: 54px; 
 }
 
-/* 2. การจัดหน้าเว็บเมื่อเปิดบนจอมือถือ */
+/* =========================================
+   📱 Presentation Mockup Style (จำลองเป็นภาพพรีเซนต์)
+   ========================================= */
 @media screen and (max-width: 768px) {
     body {
-        /* เปลี่ยนสีพื้นหลังให้เป็นสีเทาอ่อนแบบงานพรีเซนต์ */
         background-color: #e5e5e5; 
         display: block;
-        overflow-y: auto;
+        overflow-y: auto; /* อนุญาตให้เลื่อนขึ้นลงได้ */
     }
     
     .dashboard-container {
         flex-direction: column;
     }
 
-    /* แถบเมนูเปลี่ยนหน้า ย้ายไปไว้ด้านบนและปัดซ้ายขวาได้ */
+    /* แถบเมนูด้านบน */
     .sidebar {
         width: 100%;
         padding: 16px;
@@ -217,7 +218,7 @@ body {
     }
 
     .main-content {
-        padding: 40px 20px; /* เพิ่มพื้นที่รอบๆ ให้โทรศัพท์ดูลอยอยู่ตรงกลาง */
+        padding: 40px 20px;
         display: flex;
         justify-content: center;
     }
@@ -226,23 +227,21 @@ body {
         flex-direction: column;
         align-items: center;
         width: 100%;
+        gap: 30px; /* เพิ่มระยะห่างระหว่างโทรศัพท์จำลองกับคำอธิบาย */
     }
 
-    /* 📱 จัดการกรอบโทรศัพท์ */
+    /* 📱 จัดการกรอบโทรศัพท์ (ขนาดย่อลงเหลือ 70% ของหน้าจอ) */
     .phone-mockup {
-        /* ปรับให้เล็กลงเหลือ 70vw เพื่อให้กวาดสายตาดูได้ง่ายขึ้น */
         width: 40vw; 
-        max-width: 320px; /* จำกัดความกว้างสูงสุดไม่ให้ใหญ่เกินไป */
+        max-width: 320px; 
         height: auto;
-        /* บังคับสัดส่วนให้เป็นโทรศัพท์เสมอ */
         aspect-ratio: 375 / 812; 
         
-        /* ขอบโทรศัพท์สีดำ */
         border: 12px solid #111;
         border-radius: 35px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
     }
-    /* ปรับขนาดรอยบาก iPhone ให้เล็กลงตามสัดส่วนจอ */
+
     .phone-mockup::before {
         width: 90px;
         height: 26px;
@@ -252,8 +251,12 @@ body {
         padding-top: 45px;
     }
 
-    /* ซ่อนกล่องคำอธิบายด้านล่าง เพื่อให้โฟกัสที่งานดีไซน์เน้นๆ */
+    /* 📖 จัดการแผงคำอธิบายให้แสดงด้านล่าง */
     .description-panel {
-        display: none;
+        display: block; /* ยกเลิกการซ่อน */
+        width: 100%; /* ขยายเต็มความกว้าง */
+        max-width: 320px; /* ให้กว้างเท่ากับหน้าจอโทรศัพท์จำลอง หรือจะลบออกเพื่อให้กว้างเต็มจอก็ได้ค่ะ */
+        margin-top: 10px; /* เพิ่มระยะห่างด้านบน */
+        box-sizing: border-box;
     }
 }
