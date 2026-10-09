@@ -185,9 +185,16 @@ body {
     
     /* 2. ยกเลิกระบบซ้าย-ขวา (Flex) ของคอนเทนเนอร์หลัก */
     .dashboard-container, 
-    .main-content, 
-    .mockup-wrapper {
+    .main-content {
         display: block !important; 
+        height: auto !important;
+        width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .mockup-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
         height: auto !important;
         width: 100% !important;
         overflow: visible !important;
@@ -224,6 +231,7 @@ body {
 
     /* 3. จัดโทรศัพท์ให้อยู่ตรงกลางจอด้วย Margin (เลิกใช้ Flex) */
     .phone-mockup {
+        order: 1;
         width: 70vw !important; 
         max-width: 320px !important; 
         /* ใช้การคำนวณความสูงแทน aspect-ratio เพื่อกันเบราว์เซอร์เก่าพัง */
@@ -240,12 +248,13 @@ body {
     .phone-mockup::before { width: 90px; height: 26px; top: 8px; }
     .line-header { padding-top: 45px; }
 
-    /* 4. จัดคำอธิบายให้อยู่ใต้โทรศัพท์แบบเป๊ะๆ */
+    /* Keep the current feature description visible before the phone preview. */
     .description-panel {
+        order: 0;
         display: block !important;
         width: 100% !important;
         max-width: 320px !important;
-        margin: 30px auto 0 auto !important; /* ดันลงมาจากโทรศัพท์ 30px และอยู่กึ่งกลาง */
+        margin: 30px auto 0 auto !important; /* เว้นระยะจากเมนูและจัดให้อยู่กึ่งกลาง */
         
         padding: 24px !important;
         border-radius: 20px !important;
