@@ -208,13 +208,22 @@
 
                 </div>
             </div>
-
-            <!-- คำอธิบายหน้าจอ (เปลี่ยนตามเนื้อหา) -->
+            <!-- คำอธิบายหน้าจอ (Desktop only) -->
             <div class="description-panel" id="desc-panel">
                 <!-- เนื้อหาจะถูกแทรกด้วย JavaScript -->
             </div>
         </div>
     </main>
+</div>
+
+<!-- Mobile: Modal คำอธิบายหน้าจอ (อยู่นอก dashboard ทั้งหมด) -->
+<div class="desc-modal-overlay" id="desc-modal-overlay">
+    <div class="desc-modal" id="desc-modal">
+        <button class="desc-modal-close" id="desc-modal-close">✕</button>
+        <div class="desc-modal-body" id="desc-modal-body">
+            <!-- เนื้อหาจะถูกแทรกด้วย JavaScript -->
+        </div>
+    </div>
 </div>
 
 <script src="script.js"></script>

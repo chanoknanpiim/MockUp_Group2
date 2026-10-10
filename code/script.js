@@ -68,8 +68,24 @@ const app = {
     init() {
         this.bindSidebarEvents();
         this.bindStarRating();
+        this.bindModalEvents();
         // แสดงหน้าแรกเริ่มต้น
         this.navigate('screen-welcome');
+    },
+
+    bindModalEvents() {
+        // ปุ่มปิด modal
+        const closeBtn = document.getElementById('desc-modal-close');
+        if(closeBtn) {
+            closeBtn.addEventListener('click', () => this.hideDescModal());
+        }
+        // กดพื้นหลัง overlay ปิด modal
+        const overlay = document.getElementById('desc-modal-overlay');
+        if(overlay) {
+            overlay.addEventListener('click', (e) => {
+                if(e.target === overlay) this.hideDescModal();
+            });
+        }
     },
 
     bindSidebarEvents() {
@@ -86,9 +102,7 @@ const app = {
         const stars = document.querySelectorAll('.star-rating .star');
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
-                // เคลียร์ active ทั้งหมด
                 stars.forEach(s => s.classList.remove('active'));
-                // ใส่ active จนถึงตัวที่คลิก
                 for(let i = 0; i <= index; i++) {
                     stars[i].classList.add('active');
                 }
@@ -126,27 +140,36 @@ const app = {
             closeBtn.style.display = 'none';
         }
 
-        // 4. อัปเดต Sidebar Active State
+        // 4. อัปเดต Sidebar Active State + auto-scroll บน mobile
         document.querySelectorAll('#nav-menu button').forEach(btn => {
             btn.classList.remove('active');
             if(btn.getAttribute('data-target') === screenId) {
                 btn.classList.add('active');
+                if(window.innerWidth <= 768) {
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
             }
         });
 
-        // 5. อัปเดตแผงคำอธิบาย
+        // 5. อัปเดตคำอธิบาย
         this.updateDescription(screenId);
+
+        // 6. บน mobile → เปิด modal คำอธิบายทุกครั้งที่เปลี่ยนหน้า
+        if(window.innerWidth <= 768) {
+            this.showDescModal();
+        }
     },
 
     updateDescription(screenId) {
         const panel = document.getElementById('desc-panel');
+        const modalBody = document.getElementById('desc-modal-body');
         const data = screenDescriptions[screenId];
         
         if(!data) return;
 
         let featuresHtml = data.features.map(f => `<li>${f}</li>`).join('');
 
-        panel.innerHTML = `
+        const html = `
             <h3 class="desc-title">${data.title}</h3>
             <div class="desc-section">
                 <h4>🎯 วัตถุประสงค์</h4>
@@ -161,6 +184,20 @@ const app = {
                 <p>${data.usage}</p>
             </div>
         `;
+
+        // อัปเดตทั้ง Desktop panel และ Modal body
+        if(panel) panel.innerHTML = html;
+        if(modalBody) modalBody.innerHTML = html;
+    },
+
+    showDescModal() {
+        const overlay = document.getElementById('desc-modal-overlay');
+        if(overlay) overlay.classList.add('show');
+    },
+
+    hideDescModal() {
+        const overlay = document.getElementById('desc-modal-overlay');
+        if(overlay) overlay.classList.remove('show');
     }
 };
 
